@@ -37,6 +37,10 @@ const ImagePreviewModal: FC<ImagePreviewModalProps> = memo(({ image, title, isOp
               alt={title}
               loading="lazy"
               className="w-full h-auto object-contain rounded"
+              onError={() => {
+                console.warn('Failed to load image in preview modal:', image);
+                // Image will show broken image icon, which is fine for preview
+              }}
             />
             <motion.button
               onClick={onClose}

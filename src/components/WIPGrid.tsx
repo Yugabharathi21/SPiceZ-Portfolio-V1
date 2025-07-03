@@ -45,7 +45,12 @@ const WIPCard: React.FC<WIPCardProps> = ({ project, index }) => {
           loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = '/images/placeholder-project.png';
+            console.log('🖼️ WIP image failed to load:', target.src);
+            // If GitHub raw URL fails, use placeholder directly
+            if (!target.src.includes('placeholder')) {
+              target.src = '/images/project/placeholder.svg';
+              console.log('🔄 Using WIP placeholder');
+            }
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -113,7 +118,10 @@ interface WIPGridProps {
 }
 
 export const WIPGrid: React.FC<WIPGridProps> = ({ wipProjects }) => {
-  if (wipProjects.length === 0) {
+  // Safety check to ensure wipProjects is always an array
+  const safeWipProjects = Array.isArray(wipProjects) ? wipProjects : [];
+  
+  if (safeWipProjects.length === 0) {
     return (
       <div className="text-center py-12">
         <p className="text-white/60 terminal-text">No work-in-progress projects at the moment.</p>
@@ -124,7 +132,7 @@ export const WIPGrid: React.FC<WIPGridProps> = ({ wipProjects }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {wipProjects.map((project, index) => (
+      {safeWipProjects.map((project, index) => (
         <WIPCard key={project.id} project={project} index={index} />
       ))}
     </div>

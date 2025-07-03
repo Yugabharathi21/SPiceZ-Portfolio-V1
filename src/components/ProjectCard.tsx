@@ -33,6 +33,24 @@ const ProjectCard = ({ title, description, image, githubUrl, liveUrl, technologi
           src={image}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            const originalSrc = target.src;
+            console.log('🖼️ Image failed to load:', originalSrc);
+            
+            // Try different fallbacks in order
+            if (originalSrc.includes('github')) {
+              // If GitHub raw URL failed, try local fallback
+              const imageName = originalSrc.split('/').pop() || '1.png';
+              target.src = `/images/project/${imageName}`;
+              console.log('🔄 Trying local fallback:', target.src);
+            } else if (!target.src.includes('placeholder')) {
+              // If local also failed, use placeholder
+              target.src = '/images/project/placeholder.svg';
+              console.log('🔄 Using placeholder:', target.src);
+            }
+          }}
         />
       </div>
 

@@ -7,6 +7,7 @@ import ImagePreviewModal from './components/ImagePreviewModal';
 import ResumePreviewModal from './components/ResumePreviewModal';
 import SkillCard from './components/SkillCard';
 import UnderConstruction from './components/UnderConstruction';
+import ErrorBoundary from './components/ErrorBoundary';
 import { usePortfolioData } from './hooks/usePortfolioData';
 import ProjectCard from './components/ProjectCard';
 import MultimediaCard from './components/MultimediaCard';
@@ -21,6 +22,7 @@ const isUnderConstruction = import.meta.env.VITE_UNDER_CONSTRUCTION === 'true';
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImageTitle, setSelectedImageTitle] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   
@@ -31,8 +33,9 @@ function App() {
     setIsMenuOpen(prev => !prev);
   }, []);
 
-  const handleImagePreview = useCallback((image: string) => {
+  const handleImagePreview = useCallback((image: string, title: string = 'Preview') => {
     setSelectedImage(image);
+    setSelectedImageTitle(title);
     setIsModalOpen(true);
   }, []);
 
@@ -47,7 +50,7 @@ function App() {
     );
   }
 
-  if (loading) {
+  if (loading || !portfolioData) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <Suspense fallback={<LoadingFallback />}>
@@ -79,7 +82,8 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-black pixel-bg">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-black pixel-bg">
       <BackgroundEffects />
       <Suspense fallback={<LoadingFallback />}>
         {/* Navigation */}
@@ -411,7 +415,7 @@ function App() {
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {portfolioData?.projects && portfolioData.projects.length > 0 ? (
+                {portfolioData?.projects && Array.isArray(portfolioData.projects) && portfolioData.projects.length > 0 ? (
                   portfolioData.projects.map((project) => (
                     <ProjectCard
                       key={project.id}
@@ -446,12 +450,12 @@ function App() {
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? (
+                {portfolioData?.multimedia && Array.isArray(portfolioData.multimedia) && portfolioData.multimedia.length > 0 ? (
                   portfolioData.multimedia.map((item, index) => (
                     <MultimediaCard
                       key={index}
                       {...item}
-                      onClick={() => handleImagePreview(item.image)}
+                      onClick={() => handleImagePreview(item.image, item.title)}
                     />
                   ))
                 ) : (
@@ -481,7 +485,7 @@ function App() {
                 <p className="text-white/70 terminal-text">Projects currently under development</p>
               </motion.div>
 
-              <WIPGrid wipProjects={portfolioData?.wip || []} />
+              <WIPGrid wipProjects={portfolioData?.wip && Array.isArray(portfolioData.wip) ? portfolioData.wip : []} />
             </div>
           </section>
 
@@ -577,7 +581,7 @@ function App() {
         {/* Image Preview Modal */}
         <ImagePreviewModal
           image={selectedImage}
-          title={portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? portfolioData.multimedia[0].title : "Preview"}
+          title={selectedImageTitle}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
@@ -588,6 +592,7 @@ function App() {
         />
       </Suspense>
     </div>
+    </ErrorBoundary>
   );
 }
 
