@@ -1,93 +1,31 @@
 import { useState, useCallback, memo, lazy, Suspense } from 'react';
-import { Terminal, Gamepad2, Image, Youtube, Twitch, Mail, Github, Car, Palette, Menu, X, ExternalLink, FileText } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import projectsData from './data/projects.json';
+import { Terminal, Gamepad2, Image, Youtube, Mail, Github, Car, Palette, Menu, X, FileText } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from './styles/animations';
 import LoadingFallback from './components/LoadingFallback';
 import ImagePreviewModal from './components/ImagePreviewModal';
 import ResumePreviewModal from './components/ResumePreviewModal';
 import SkillCard from './components/SkillCard';
 import UnderConstruction from './components/UnderConstruction';
+import { usePortfolioData } from './hooks/usePortfolioData';
+import ProjectCard from './components/ProjectCard';
+import MultimediaCard from './components/MultimediaCard';
+import { WIPGrid } from './components/WIPGrid';
 
 // Lazy load components
-const ProjectCard = lazy(() => import('./components/ProjectCard'));
-const MultimediaCard = lazy(() => import('./components/MultimediaCard'));
 const BackgroundEffects = lazy(() => import('./components/BackgroundEffects'));
 
-// Check if site is under construction
-const isUnderConstruction = process.env.VITE_UNDER_CONSTRUCTION === 'false';
-
-// Animation keyframes
-const animations = {
-  matrixRain: `
-    @keyframes matrix-rain {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100%); }
-    }
-  `,
-  float: `
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-  `,
-  pulseGlow: `
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.1; }
-      50% { opacity: 0.3; }
-    }
-  `,
-  gridScroll: `
-    @keyframes grid-scroll {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(50px); }
-    }
-  `,
-  scanline: `
-    @keyframes scanline {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(100%); }
-    }
-  `
-};
-
-// Add style tag to head
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
-  style.textContent = Object.values(animations).join('\n');
-  document.head.appendChild(style);
-}
-
-// Types
-interface MultimediaItem {
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  githubUrl: string;
-  liveUrl?: string;
-  technologies: string[];
-}
-
-interface ProjectData {
-  projects: Project[];
-  multimedia: MultimediaItem[];
-  wip: Project[];
-}
-
-const typedProjectData = projectsData as ProjectData;
+// Check if site is under construction from environment variable
+const isUnderConstruction = import.meta.env.VITE_UNDER_CONSTRUCTION === 'true';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  
+  // Fetch portfolio data from GitHub
+  const { data: portfolioData, loading, error } = usePortfolioData();
 
   const handleMenuToggle = useCallback(() => {
     setIsMenuOpen(prev => !prev);
@@ -101,8 +39,41 @@ function App() {
   if (isUnderConstruction) {
     return (
       <div className="min-h-screen bg-black">
-        <BackgroundEffects />
+        <Suspense fallback={<LoadingFallback />}>
+          <BackgroundEffects />
+        </Suspense>
         <UnderConstruction />
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <Suspense fallback={<LoadingFallback />}>
+          <BackgroundEffects />
+        </Suspense>
+        <LoadingFallback />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <Suspense fallback={<LoadingFallback />}>
+          <BackgroundEffects />
+        </Suspense>
+        <div className="text-center terminal-window p-8 max-w-md">
+          <h2 className="text-white text-xl mb-4">Connection Error</h2>
+          <p className="text-white/70 terminal-text mb-4">Unable to load portfolio data. Please try again later.</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 hover:bg-emerald-500/30 transition-all"
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
@@ -355,11 +326,11 @@ function App() {
                         <p className="text-white/70 text-sm terminal-text">Years Coding</p>
                       </div>
                       <div className="glass-card p-4 text-center">
-                        <p className="text-emerald-400 text-2xl font-bold">{typedProjectData.projects.length + typedProjectData.wip.length}+</p>
+                        <p className="text-emerald-400 text-2xl font-bold">{(portfolioData?.projects?.length || 0) + (portfolioData?.wip?.length || 0)}+</p>
                         <p className="text-white/70 text-sm terminal-text">Projects</p>
                       </div>
                       <div className="glass-card p-4 text-center">
-                        <p className="text-emerald-400 text-2xl font-bold">{typedProjectData.multimedia.length}+</p>
+                        <p className="text-emerald-400 text-2xl font-bold">{portfolioData?.multimedia?.length || 0}+</p>
                         <p className="text-white/70 text-sm terminal-text">Designs</p>
                       </div>
                       <div className="glass-card p-4 text-center">
@@ -440,12 +411,19 @@ function App() {
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {typedProjectData.projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    {...project}
-                  />
-                ))}
+                {portfolioData?.projects && portfolioData.projects.length > 0 ? (
+                  portfolioData.projects.map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      {...project}
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-white/60 terminal-text">No projects available at the moment.</p>
+                    <p className="text-white/40 text-sm mt-2 terminal-text">Check back soon for updates!</p>
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -468,13 +446,20 @@ function App() {
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {typedProjectData.multimedia.map((item, index) => (
-                  <MultimediaCard
-                    key={index}
-                    {...item}
-                    onClick={() => handleImagePreview(item.image)}
-                  />
-                ))}
+                {portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? (
+                  portfolioData.multimedia.map((item, index) => (
+                    <MultimediaCard
+                      key={index}
+                      {...item}
+                      onClick={() => handleImagePreview(item.image)}
+                    />
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-12">
+                    <p className="text-white/60 terminal-text">No multimedia content available at the moment.</p>
+                    <p className="text-white/40 text-sm mt-2 terminal-text">Check back soon for design showcases!</p>
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -496,14 +481,7 @@ function App() {
                 <p className="text-white/70 terminal-text">Projects currently under development</p>
               </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {typedProjectData.wip.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    {...project}
-                  />
-                ))}
-              </div>
+              <WIPGrid wipProjects={portfolioData?.wip || []} />
             </div>
           </section>
 
@@ -599,7 +577,7 @@ function App() {
         {/* Image Preview Modal */}
         <ImagePreviewModal
           image={selectedImage}
-          title={typedProjectData.multimedia[0].title}
+          title={portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? portfolioData.multimedia[0].title : "Preview"}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
