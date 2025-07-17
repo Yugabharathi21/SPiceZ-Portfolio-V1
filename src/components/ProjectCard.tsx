@@ -36,20 +36,9 @@ const ProjectCard = ({ title, description, image, githubUrl, liveUrl, technologi
           loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            const originalSrc = target.src;
-            console.log('🖼️ Image failed to load:', originalSrc);
-            
-            // Try different fallbacks in order
-            if (originalSrc.includes('github')) {
-              // If GitHub raw URL failed, try local fallback
-              const imageName = originalSrc.split('/').pop() || '1.png';
-              target.src = `/images/project/${imageName}`;
-              console.log('🔄 Trying local fallback:', target.src);
-            } else if (!target.src.includes('placeholder')) {
-              // If local also failed, use placeholder
-              target.src = '/images/project/placeholder.svg';
-              console.log('🔄 Using placeholder:', target.src);
-            }
+            console.log('🖼️ Project image failed to load:', target.src);
+            // Use placeholder if image fails to load
+            target.src = '/images/project/placeholder.svg';
           }}
         />
       </div>

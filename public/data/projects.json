@@ -35,33 +35,6 @@
       "githubUrl": "https://github.com/Yugabharathi21/Think-Forge",
       "liveUrl": "#",
       "technologies": ["React", "Node.js", "Express", "MongoDB", "FAST API"]
-    },
-    {
-      "id": 5,
-      "title": "E-Task [E-Ink Style To-Do List App]",
-      "description": "A minimalist task management app designed with an e-ink inspired interface for distraction-free productivity. Built for students and professionals who prefer clarity over clutter.",
-      "image": "/images/project/E-ink.png",
-      "githubUrl": "https://github.com/Yugabharathi21/to-do-list-project",
-      "liveUrl": "https://to-do-list-project-inky.vercel.app/",
-      "technologies": ["React", "Tailwind CSS", "TypeScript", "Framer Motion"]
-    },
-    {
-      "id": 6,
-      "title": "PaperFolio – Notebook-Styled Portfolio Webpage",
-      "description": "A unique portfolio website inspired by a digital notebook theme, blending handwritten aesthetics with clean modern UI. Designed to present projects like journal entries for a more personal, creative experience.",
-      "image": "/images/project/Notebook.jpg",
-      "githubUrl": "https://github.com/Yugabharathi21/notebook-styled-portfolio-site",
-      "liveUrl": "#",
-      "technologies": ["React", "Tailwind CSS", "TypeScript", "Framer Motion"]
-    },
-    {
-      "id": 7,
-      "title": "Craftify – E-commerce Platform",
-      "description": "A fully functional online e-commerce platform developed as part of my college mini project, designed to manage handmade craft items with smooth user experience and secure checkout flow.",
-      "image": "/images/project/6.jpg",
-      "githubUrl": "https://github.com/Yugabharathi21/Crafity",
-      "liveUrl": "#",
-      "technologies": ["React", "Node.js", "Express", "MongoDB"]
     }
   ],
   "multimedia": [
@@ -213,7 +186,7 @@
   ],
   "wip": [
     {
-      "id": 1,
+      "id": 2,
       "title": "Ox-Inventory Revamp by SPZYT",
       "description": "A complete visual and functional revamp of the popular ox-inventory system, customized for enhanced UX and FiveM gameplay integration.",
       "image": "/images/project/7.png",
@@ -221,12 +194,12 @@
       "technologies": ["React", "Node.js", "Express", "MongoDB", "FAST API"]
     },
     {
-      "id": 2,
-      "title": "CW Racing – UI Revamp by SPiceZ",
-      "description": "Currently working on a complete redesign of the CW Racing interface for FiveM. This project aims to bring a sleek, responsive, and immersive racing HUD tailored for competitive street racing RP, with lap tracking, player stats, and clean minimal UI.",
+      "id": 3,
+      "title": "Craftify – E-commerce Platform",
+      "description": "An online e-commerce platform developed as part of my college mini project, focused on craft item management and seamless checkout.",
       "image": "/images/project/6.jpg",
       "githubUrl": "https://github.com/Yugabharathi21/Think-Forge",
-      "technologies": ["Lua", "JavaScript", "FiveM", "HTML", "CSS"]
+      "technologies": ["React", "Node.js", "Express", "MongoDB"]
     }
   ]
 }

@@ -38,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = '/images/placeholder-project.png';
+            target.src = '/images/project/placeholder.svg';
           }}
         />
       </div>

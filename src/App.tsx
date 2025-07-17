@@ -7,7 +7,6 @@ import ImagePreviewModal from './components/ImagePreviewModal';
 import ResumePreviewModal from './components/ResumePreviewModal';
 import SkillCard from './components/SkillCard';
 import UnderConstruction from './components/UnderConstruction';
-import ErrorBoundary from './components/ErrorBoundary';
 import { usePortfolioData } from './hooks/usePortfolioData';
 import ProjectCard from './components/ProjectCard';
 import MultimediaCard from './components/MultimediaCard';
@@ -22,7 +21,6 @@ const isUnderConstruction = import.meta.env.VITE_UNDER_CONSTRUCTION === 'true';
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
-  const [selectedImageTitle, setSelectedImageTitle] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   
@@ -33,9 +31,8 @@ function App() {
     setIsMenuOpen(prev => !prev);
   }, []);
 
-  const handleImagePreview = useCallback((image: string, title: string = 'Preview') => {
+  const handleImagePreview = useCallback((image: string) => {
     setSelectedImage(image);
-    setSelectedImageTitle(title);
     setIsModalOpen(true);
   }, []);
 
@@ -50,7 +47,7 @@ function App() {
     );
   }
 
-  if (loading || !portfolioData) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <Suspense fallback={<LoadingFallback />}>
@@ -82,8 +79,7 @@ function App() {
   }
 
   return (
-    <ErrorBoundary>
-      <div className="min-h-screen bg-black pixel-bg">
+    <div className="min-h-screen bg-black pixel-bg">
       <BackgroundEffects />
       <Suspense fallback={<LoadingFallback />}>
         {/* Navigation */}
@@ -415,7 +411,7 @@ function App() {
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {portfolioData?.projects && Array.isArray(portfolioData.projects) && portfolioData.projects.length > 0 ? (
+                {portfolioData?.projects && portfolioData.projects.length > 0 ? (
                   portfolioData.projects.map((project) => (
                     <ProjectCard
                       key={project.id}
@@ -450,12 +446,12 @@ function App() {
               </motion.div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {portfolioData?.multimedia && Array.isArray(portfolioData.multimedia) && portfolioData.multimedia.length > 0 ? (
+                {portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? (
                   portfolioData.multimedia.map((item, index) => (
                     <MultimediaCard
                       key={index}
                       {...item}
-                      onClick={() => handleImagePreview(item.image, item.title)}
+                      onClick={() => handleImagePreview(item.image)}
                     />
                   ))
                 ) : (
@@ -485,8 +481,101 @@ function App() {
                 <p className="text-white/70 terminal-text">Projects currently under development</p>
               </motion.div>
 
-              <WIPGrid wipProjects={portfolioData?.wip && Array.isArray(portfolioData.wip) ? portfolioData.wip : []} />
+              <WIPGrid wipProjects={portfolioData?.wip || []} />
             </div>
+          </section>
+
+          {/* Contact Section */}
+          <section className="container mx-auto px-4 py-12">
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              className="max-w-6xl mx-auto"
+            >
+              <motion.div
+                variants={fadeInUp}
+                className="text-center mb-8"
+              >
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Terminal className="w-6 h-6 text-emerald-400" />
+                  <h2 className="text-2xl font-bold text-white">Contact</h2>
+                </div>
+                <p className="text-white/70 terminal-text">Let's connect and build something amazing together</p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Email */}
+                <motion.a
+                  variants={fadeInUp}
+                  href="mailto:yuga.bharathijai2106@gmail.com"
+                  className="terminal-window p-6 hover:bg-white/5 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-emerald-900/20 rounded-lg group-hover:bg-emerald-900/30 transition-colors">
+                      <Mail className="w-6 h-6 text-emerald-400" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white/60 text-sm terminal-text mb-1">Email</p>
+                      <p className="text-white group-hover:text-emerald-400 transition-colors terminal-text text-sm">
+                        yuga.bharathijai2106@gmail.com
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+
+                {/* GitHub */}
+                <motion.a
+                  variants={fadeInUp}
+                  href="https://github.com/Yugabharathi21"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="terminal-window p-6 hover:bg-white/5 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-emerald-900/20 rounded-lg group-hover:bg-emerald-900/30 transition-colors">
+                      <Github className="w-6 h-6 text-emerald-400" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white/60 text-sm terminal-text mb-1">GitHub</p>
+                      <p className="text-white group-hover:text-emerald-400 transition-colors terminal-text text-sm">
+                        github.com/Yugabharathi21
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+
+                {/* Status */}
+                <motion.div
+                  variants={fadeInUp}
+                  className="terminal-window p-6"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-emerald-900/20 rounded-lg">
+                      <div className="w-6 h-6 flex items-center justify-center">
+                        <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white/60 text-sm terminal-text mb-1">Status</p>
+                      <p className="text-emerald-400 terminal-text text-sm">
+                        Available for opportunities
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              <motion.div
+                variants={fadeInUp}
+                className="text-center mt-8"
+              >
+                <p className="text-white/40 terminal-text text-sm">
+                  <span className="text-emerald-400">$</span> Response time: Usually within 24 hours
+                </p>
+              </motion.div>
+            </motion.div>
           </section>
 
           {/* Footer */}
@@ -581,7 +670,7 @@ function App() {
         {/* Image Preview Modal */}
         <ImagePreviewModal
           image={selectedImage}
-          title={selectedImageTitle}
+          title={portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? portfolioData.multimedia[0].title : "Preview"}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
@@ -592,7 +681,6 @@ function App() {
         />
       </Suspense>
     </div>
-    </ErrorBoundary>
   );
 }
 

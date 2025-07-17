@@ -31,119 +31,37 @@ export interface PortfolioData {
   wip: WIPProject[];
 }
 
-const GITHUB_API_URL = 'https://api.github.com/repos/Yugabharathi21/portfolio-data/contents/data/projects.json?ref=master';
-
 export const usePortfolioData = () => {
   const [data, setData] = useState<PortfolioData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const processImageUrl = (imageUrl: string): string => {
-    // If it's already a full URL (GitHub raw or local), return as-is
-    if (imageUrl.startsWith('http') || imageUrl.startsWith('/')) {
-      return imageUrl;
-    }
-    
-    // If it's a relative path, make it absolute
-    return `/${imageUrl}`;
-  };
-
-  const processPortfolioData = (rawData: PortfolioData): PortfolioData => {
-    // Ensure all arrays exist and are properly initialized
-    const processedData: PortfolioData = {
-      projects: rawData.projects || [],
-      multimedia: rawData.multimedia || [],
-      wip: rawData.wip || []
-    };
-
-    // Process project images
-    if (processedData.projects && Array.isArray(processedData.projects)) {
-      processedData.projects = processedData.projects.map(project => ({
-        ...project,
-        image: processImageUrl(project.image)
-      }));
-    }
-    
-    // Process multimedia images
-    if (processedData.multimedia && Array.isArray(processedData.multimedia)) {
-      processedData.multimedia = processedData.multimedia.map(item => ({
-        ...item,
-        image: processImageUrl(item.image)
-      }));
-    }
-    
-    // Process WIP project images
-    if (processedData.wip && Array.isArray(processedData.wip)) {
-      processedData.wip = processedData.wip.map(project => ({
-        ...project,
-        image: processImageUrl(project.image)
-      }));
-    }
-
-    return processedData;
-  };
-
   useEffect(() => {
-    let isMounted = true;
-
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
         
-        console.log('🔄 Fetching portfolio data from GitHub API...');
+        console.log('Loading portfolio data from local src file...');
         
-        // Get GitHub token from environment variables
-        const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
+        // Import the local JSON data directly from src
+        const portfolioData = await import('../data/projects.json');
         
-        if (!githubToken) {
-          throw new Error('GitHub token not found in environment variables');
-        }
-        
-        const headers: Record<string, string> = {
-          'Accept': 'application/vnd.github.v3+json',
-          'Authorization': `Bearer ${githubToken}`,
-          'User-Agent': 'Portfolio-App'
-        };
-        
-        const response = await fetch(GITHUB_API_URL, { headers });
-        
-        if (!response.ok) {
-          throw new Error(`GitHub API error! status: ${response.status} - ${response.statusText}`);
-        }
-        
-        const fileData = await response.json();
-        
-        // GitHub API returns file content as base64 encoded string
-        const content = atob(fileData.content);
-        const portfolioData: PortfolioData = JSON.parse(content);
-        
-        // Only proceed if component is still mounted
-        if (!isMounted) return;
-        
-        // Process the data and ensure arrays are properly initialized
-        const processedData = processPortfolioData(portfolioData);
-        
-        console.log('✅ Portfolio data loaded successfully:', {
-          projects: processedData.projects?.length || 0,
-          multimedia: processedData.multimedia?.length || 0,
-          wip: processedData.wip?.length || 0
+        console.log('Portfolio data loaded successfully:', {
+          projects: portfolioData.projects?.length || 0,
+          multimedia: portfolioData.multimedia?.length || 0,
+          wip: portfolioData.wip?.length || 0
         });
         
-        if (isMounted) {
-          setData(processedData);
-        }
+        setData(portfolioData);
       } catch (err) {
-        console.error('❌ Failed to fetch portfolio data:', err);
-        console.log('🔄 Using fallback data instead...');
+        console.error('Failed to load portfolio data:', err);
+        console.log('Using fallback data instead...');
         
-        if (!isMounted) return;
+        // Set error for debugging but still use fallback data
+        setError(err instanceof Error ? err.message : 'Unknown error occurred');
         
-        // Don't set error if we have fallback data - just log it
-        console.error('❌ Failed to fetch portfolio data:', err);
-        console.log('🔄 Using fallback data instead...');
-        
-        // Fallback data in case of failure (using local image paths)
+        // Comprehensive fallback data
         const fallbackData: PortfolioData = {
           projects: [
             {
@@ -163,6 +81,51 @@ export const usePortfolioData = () => {
               githubUrl: "https://github.com/Yugabharathi21/final-crescita/tree/main",
               liveUrl: "https://cse-crescita-25.netlify.app/",
               technologies: ["React", "Tailwind CSS", "TypeScript"]
+            },
+            {
+              id: 3,
+              title: "FiveM HUD for Qbox",
+              description: "A custom HUD interface for FiveM, revamped from qbx-hud to improve user experience and visuals for roleplay servers.",
+              image: "/images/project/placeholder.svg",
+              githubUrl: "https://github.com/Yugabharathi21/spz-hud-fivem",
+              liveUrl: "#",
+              technologies: ["Lua", "JavaScript", "FiveM API", "HTML", "CSS"]
+            },
+            {
+              id: 4,
+              title: "ThinkForge – Study Planner Chatbot",
+              description: "An AI-powered chatbot that helps students plan their study schedules effectively. Built for KEC Hackathon 2k25, and winner of Hackbuzz.",
+              image: "/images/project/placeholder.svg",
+              githubUrl: "https://github.com/Yugabharathi21/Think-Forge",
+              liveUrl: "#",
+              technologies: ["React", "Node.js", "Express", "MongoDB", "FAST API"]
+            },
+            {
+              id: 5,
+              title: "E-Task [E-Ink Style To-Do List App]",
+              description: "A minimalist task management app designed with an e-ink inspired interface for distraction-free productivity. Built for students and professionals who prefer clarity over clutter.",
+              image: "/images/project/E-ink.png",
+              githubUrl: "https://github.com/Yugabharathi21/to-do-list-project",
+              liveUrl: "https://to-do-list-project-inky.vercel.app/",
+              technologies: ["React", "Tailwind CSS", "TypeScript", "Framer Motion"]
+            },
+            {
+              id: 6,
+              title: "PaperFolio – Notebook-Styled Portfolio Webpage",
+              description: "A unique portfolio website inspired by a digital notebook theme, blending handwritten aesthetics with clean modern UI. Designed to present projects like journal entries for a more personal, creative experience.",
+              image: "/images/project/Notebook.jpg",
+              githubUrl: "https://github.com/Yugabharathi21/notebook-styled-portfolio-site",
+              liveUrl: "#",
+              technologies: ["React", "Tailwind CSS", "TypeScript", "Framer Motion"]
+            },
+            {
+              id: 7,
+              title: "Craftify – E-commerce Platform",
+              description: "A fully functional online e-commerce platform developed as part of my college mini project, designed to manage handmade craft items with smooth user experience and secure checkout flow.",
+              image: "/images/project/6.jpg",
+              githubUrl: "https://github.com/Yugabharathi21/Crafity",
+              liveUrl: "#",
+              technologies: ["React", "Node.js", "Express", "MongoDB"]
             }
           ],
           multimedia: [
@@ -185,6 +148,61 @@ export const usePortfolioData = () => {
               title: "Poster Design",
               description: "Creative poster made for a university-level event promotion.",
               image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Thumbnail Design",
+              description: "Freelance portfolio thumbnail designed to reflect a bold and minimal aesthetic.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Thumbnail Design",
+              description: "A YouTube thumbnail created for a freelance client.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Thumbnail Design",
+              description: "A personal branding thumbnail design showcasing my editing style.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Thumbnail Design",
+              description: "Freelance thumbnail crafted for high visibility and engagement.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Thumbnail Design",
+              description: "Client project thumbnail designed to maximize click-through rate.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Thumbnail Design",
+              description: "Freelance thumbnail demonstrating color and composition skills.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Banner Design",
+              description: "Custom banner created for a freelance client campaign.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Banner Design",
+              description: "Custom banner created for a freelance client campaign.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Banner Design",
+              description: "Custom banner created for a freelance client campaign.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Banner Design",
+              description: "Custom banner created for a freelance client campaign.",
+              image: "/images/multimedia/placeholder.svg"
+            },
+            {
+              title: "Banner Design",
+              description: "Custom banner created for a freelance client campaign.",
+              image: "/images/multimedia/placeholder.svg"
             }
           ],
           wip: [
@@ -194,27 +212,26 @@ export const usePortfolioData = () => {
               description: "A complete visual and functional revamp of the popular ox-inventory system, customized for enhanced UX and FiveM gameplay integration.",
               image: "/images/project/placeholder.svg",
               githubUrl: "https://github.com/Yugabharathi21/Think-Forge",
+              technologies: ["React", "Node.js", "Express", "MongoDB", "FAST API"]
+            },
+            {
+              id: 2,
+              title: "CW Racing – UI Revamp by SPiceZ",
+              description: "Currently working on a complete redesign of the CW Racing interface for FiveM. This project aims to bring a sleek, responsive, and immersive racing HUD tailored for competitive street racing RP, with lap tracking, player stats, and clean minimal UI.",
+              image: "/images/project/placeholder.svg",
+              githubUrl: "https://github.com/Yugabharathi21/Think-Forge",
               technologies: ["Lua", "JavaScript", "FiveM", "HTML", "CSS"]
             }
           ]
         };
         
-        // Process the fallback data to ensure consistency
-        const processedFallbackData = processPortfolioData(fallbackData);
-        setData(processedFallbackData);
+        setData(fallbackData);
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
 
     fetchData();
-
-    // Cleanup function
-    return () => {
-      isMounted = false;
-    };
   }, []);
 
   return { data, loading, error };
