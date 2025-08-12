@@ -11,6 +11,7 @@ import { usePortfolioData } from './hooks/usePortfolioData';
 import ProjectCard from './components/ProjectCard';
 import MultimediaCard from './components/MultimediaCard';
 import { WIPGrid } from './components/WIPGrid';
+import LanguagesMarquee from './components/LanguagesMarquee';
 
 // Lazy load components
 const BackgroundEffects = lazy(() => import('./components/BackgroundEffects'));
@@ -145,7 +146,7 @@ function App() {
         {/* Main Content */}
         <div className="pt-16">
           {/* Hero Section */}
-          <section id="home" className="container mx-auto px-4 pt-20">
+          <section id="home" className="container mx-auto px-4 pt-20 pb-32">
             {/* Main Hero Content */}
             <motion.div 
               className="terminal-window pl-8 relative overflow-hidden"
@@ -207,9 +208,7 @@ function App() {
                         <Youtube className="w-5 h-5" />
                       </a>
                       <a 
-                        href="https://www.linkedin.com/in/yuga-bharathi-jaisankar-2a426a291/" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                        href="mailto:yuga.bharathijai2106@gmail.com" 
                         className="text-white/80 hover:text-white transition-all"
                       >
                         <Mail className="w-5 h-5" />
@@ -251,150 +250,13 @@ function App() {
             </motion.div>
           </section>
 
-          {/* About Me Section */}
-          <motion.section 
-            id="about"
-            className="container mx-auto px-4 py-20"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-2xl text-white mb-12 pixel-border-thin inline-block p-3 tracking-wide">ABOUT.EXE</h2>
-            <div className="terminal-window p-8">
-              <div className="flex flex-col gap-6">
-                {/* Command History */}
-                <motion.div 
-                  className="flex flex-col gap-4"
-                  variants={staggerContainer}
-                  initial="initial"
-                  animate="animate"
-                >
-                  {/* System Info */}
-                  <div className="terminal-line">
-                    <span className="text-emerald-400">$</span>
-                    <span className="text-white/80 ml-2 terminal-text">neofetch</span>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-8 ml-4 terminal-text">
-                    <div className="text-white/70">
-                      <p><span className="text-emerald-400">OS:</span> Human 2.0</p>
-                      <p><span className="text-emerald-400">Kernel:</span> Creative 5.4.0</p>
-                      <p><span className="text-emerald-400">Uptime:</span> 20 years</p>
-                      <p><span className="text-emerald-400">Shell:</span> Problem_Solver v3.0</p>
-                      <p><span className="text-emerald-400">Resolution:</span> High Energy x Determination</p>
-                    </div>
-                    <div className="text-white/70">
-                      <p><span className="text-emerald-400">DE:</span> Development_Environment 2024</p>
-                      <p><span className="text-emerald-400">WM:</span> Work_Management 1.0</p>
-                      <p><span className="text-emerald-400">Terminal:</span> Tech_Enthusiast</p>
-                      <p><span className="text-emerald-400">CPU:</span> Brain @ 4.0GHz</p>
-                      <p><span className="text-emerald-400">GPU:</span> Creative_Vision RTX</p>
-                    </div>
-                  </div>
-
-                  {/* About Description */}
-                  <div className="mt-6">
-                    <div className="terminal-line">
-                      <span className="text-emerald-400">$</span>
-                      <span className="text-white/80 ml-2 terminal-text">cat about.md</span>
-                    </div>
-                    <div className="ml-4 mt-4 text-white/70 terminal-text space-y-4">
-                      <p>
-                        I'm a passionate Computer Science Engineering student with a knack for creative problem-solving and a deep interest in technology. 
-                        My journey in software development spans across web development, FiveM scripting, and multimedia design, where I blend technical expertise with creative vision.
-                      </p>
-                      <p>
-                        Currently, I'm building my portfolio to showcase my projects, including FiveM scripts, web applications, and design works. 
-                        This space reflects my skills in full-stack development, UI/UX design, and game modding, highlighting my ability to turn ideas into functional and visually compelling experiences.
-                      </p>
-                      <p>
-                        Beyond coding, I enjoy crafting visual experiences—from thumbnails to stream graphics—and exploring game asset creation. 
-                        My goal is to continuously learn, innovate, and contribute to projects that push creative and technical boundaries.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Quick Stats */}
-                  <div className="mt-6">
-                    <div className="terminal-line">
-                      <span className="text-emerald-400">$</span>
-                      <span className="text-white/80 ml-2 terminal-text">stats --quick</span>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 ml-4 mt-4">
-                      <div className="glass-card p-4 text-center">
-                        <p className="text-emerald-400 text-2xl font-bold">2+</p>
-                        <p className="text-white/70 text-sm terminal-text">Years Coding</p>
-                      </div>
-                      <div className="glass-card p-4 text-center">
-                        <p className="text-emerald-400 text-2xl font-bold">{(portfolioData?.projects?.length || 0) + (portfolioData?.wip?.length || 0)}+</p>
-                        <p className="text-white/70 text-sm terminal-text">Projects</p>
-                      </div>
-                      <div className="glass-card p-4 text-center">
-                        <p className="text-emerald-400 text-2xl font-bold">{portfolioData?.multimedia?.length || 0}+</p>
-                        <p className="text-white/70 text-sm terminal-text">Designs</p>
-                      </div>
-                      <div className="glass-card p-4 text-center">
-                        <p className="text-emerald-400 text-2xl font-bold">∞</p>
-                        <p className="text-white/70 text-sm terminal-text">Creativity</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Current Status */}
-                  <div className="mt-6">
-                    <div className="terminal-line">
-                      <span className="text-emerald-400">$</span>
-                      <span className="text-white/80 ml-2 terminal-text">current-status</span>
-                    </div>
-                    <div className="ml-4 mt-4 flex flex-wrap gap-3">
-                      <span className="terminal-badge">🎓 Learning New Tech</span>
-                      <span className="terminal-badge">💻 Building Projects</span>
-                      <span className="terminal-badge">🎨 Creating Designs</span>
-                      <span className="terminal-badge">🎮 Gaming</span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.section>
-
-          {/* Skills Grid */}
-          <motion.section 
-            id="skills" 
-            className="container mx-auto px-4 py-20"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-2xl text-white mb-12 pixel-border-thin inline-block p-3 tracking-wide">SYSTEM CAPABILITIES</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <SkillCard
-                icon={<Gamepad2 className="w-6 h-6" />}
-                title="FiveM Development"
-                items={['Custom Script Development', 'Server Configuration', 'Resource Management']}
-              />
-              <SkillCard
-                icon={<Image className="w-6 h-6" />}
-                title="Design & Graphics"
-                items={['Thumbnails', 'Banners', 'Logos', 'Stream Graphics']}
-              />
-              <SkillCard
-                icon={<Car className="w-6 h-6" />}
-                title="FiveM Assets"
-                items={['Vehicle Liveries', 'Character Outfits', 'Custom Models']}
-              />
-              <SkillCard
-                icon={<Palette className="w-6 h-6" />}
-                title="Creative Tools"
-                items={['Adobe Photoshop', 'After Effects', 'Premiere Pro', 'Blender', 'Figma']}
-                isCreativeTools={true}
-              />
-            </div>
-          </motion.section>
+          {/* Languages Marquee */}
+          <div className="mb-32">
+            <LanguagesMarquee />
+          </div>
 
           {/* Projects Section */}
-          <section id="projects" className="py-20">
+          <section id="projects" className="pt-0 pb-32">
             <div className="container mx-auto px-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -428,8 +290,43 @@ function App() {
             </div>
           </section>
 
+          {/* Skills Grid */}
+          <motion.section 
+            id="skills" 
+            className="container mx-auto px-4 py-32"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl text-white mb-12 pixel-border-thin inline-block p-3 tracking-wide">SYSTEM CAPABILITIES</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <SkillCard
+                icon={<Gamepad2 className="w-6 h-6" />}
+                title="FiveM Development"
+                items={['Custom Script Development', 'Server Configuration', 'Resource Management']}
+              />
+              <SkillCard
+                icon={<Image className="w-6 h-6" />}
+                title="Design & Graphics"
+                items={['Thumbnails', 'Banners', 'Logos', 'Stream Graphics']}
+              />
+              <SkillCard
+                icon={<Car className="w-6 h-6" />}
+                title="FiveM Assets"
+                items={['Vehicle Liveries', 'Character Outfits', 'Custom Models']}
+              />
+              <SkillCard
+                icon={<Palette className="w-6 h-6" />}
+                title="Creative Tools"
+                items={['Adobe Photoshop', 'After Effects', 'Premiere Pro', 'Blender', 'Figma']}
+                isCreativeTools={true}
+              />
+            </div>
+          </motion.section>
+
           {/* Multimedia Section */}
-          <section id="multimedia" className="py-20 bg-black/30">
+          <section id="multimedia" className="py-32 bg-black/30">
             <div className="container mx-auto px-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -465,7 +362,7 @@ function App() {
           </section>
 
           {/* Work in Progress Section */}
-          <section id="wip" className="py-20">
+          <section id="wip" className="py-32">
             <div className="container mx-auto px-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -486,7 +383,7 @@ function App() {
           </section>
 
           {/* Contact Section */}
-          <section className="container mx-auto px-4 py-12">
+          <section className="container mx-auto px-4 py-32">
             <motion.div
               variants={staggerContainer}
               initial="hidden"

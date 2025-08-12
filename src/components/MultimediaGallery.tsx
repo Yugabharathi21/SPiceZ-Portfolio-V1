@@ -36,7 +36,7 @@ const MultimediaCard: React.FC<MultimediaCardProps> = ({ item, index, onImageCli
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = '/images/multimedia/placeholder.svg';
+            target.src = '/images/placeholder-multimedia.png';
             setImageLoaded(true);
           }}
         />
