@@ -12,6 +12,7 @@ import ProjectCard from './components/ProjectCard';
 import MultimediaCard from './components/MultimediaCard';
 import { WIPGrid } from './components/WIPGrid';
 import LanguagesMarquee from './components/LanguagesMarquee';
+import GitHubContributions from './components/GitHubContributions';
 
 // Lazy load components
 const BackgroundEffects = lazy(() => import('./components/BackgroundEffects'));
@@ -98,6 +99,7 @@ function App() {
               <div className="hidden md:flex items-center space-x-8">
                 <a href="#home" className="nav-link">HOME</a>
                 <a href="#skills" className="nav-link">SKILLS</a>
+                <a href="#github" className="nav-link">GITHUB</a>
                 <a href="#projects" className="nav-link">PROJECTS</a>
                 <a href="#contact" className="nav-link">CONTACT</a>
                 
@@ -129,6 +131,7 @@ function App() {
               <div className="md:hidden bg-black/95 border-t border-white/10">
                 <a href="#home" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">HOME</a>
                 <a href="#skills" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">SKILLS</a>
+                <a href="#github" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">GITHUB</a>
                 <a href="#projects" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">PROJECTS</a>
                 <a href="#contact" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">CONTACT</a>
                 <button 
@@ -324,6 +327,9 @@ function App() {
               />
             </div>
           </motion.section>
+
+          {/* GitHub Contributions */}
+          <GitHubContributions />
 
           {/* Multimedia Section */}
           <section id="multimedia" className="py-32 bg-black/30">
