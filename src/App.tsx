@@ -186,7 +186,7 @@ function App() {
                       className="text-lg text-white/80 mb-6 font-light"
                       {...fadeInUp}
                     >
-                      II Year Computer Science Engineering @ Kongu Engineering College, Erode
+                      III Year Computer Science Engineering @ Kongu Engineering College, Erode
                     </motion.p>
                     <motion.div 
                       className="flex gap-6 mb-6"
@@ -227,7 +227,7 @@ function App() {
                     transition={{ duration: 1 }}
                   >
                     <motion.img
-                      src="/images/profile-bw.png"
+                      src="https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835772/profile-bw_knwbir.png"
                       alt="Profile"
                       className="w-[800px] md:w-[600px] lg:w-[800px] h-full object-cover object-[80%_top] scale-125 md:scale-110 lg:scale-135"
                     />
