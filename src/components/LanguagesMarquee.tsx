@@ -1,35 +1,35 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 
-// Import language logos
+// Language logos from public directory
 const languages = [
-  { name: 'TypeScript', logo: '/node_modules/programming-languages-logos/src/typescript/typescript.svg' },
-  { name: 'JavaScript', logo: '/node_modules/programming-languages-logos/src/javascript/javascript.svg' },
-  { name: 'Python', logo: '/node_modules/programming-languages-logos/src/python/python.svg' },
-  { name: 'Java', logo: '/node_modules/programming-languages-logos/src/java/java.svg' },
-  { name: 'C++', logo: '/node_modules/programming-languages-logos/src/cpp/cpp.svg' },
-  { name: 'C#', logo: '/node_modules/programming-languages-logos/src/csharp/csharp.svg' },
-  { name: 'HTML', logo: '/node_modules/programming-languages-logos/src/html/html.svg' },
-  { name: 'CSS', logo: '/node_modules/programming-languages-logos/src/css/css.svg' },
-  { name: 'Lua', logo: '/node_modules/programming-languages-logos/src/lua/lua.svg' },
-  { name: 'TypeScript', logo: '/node_modules/programming-languages-logos/src/typescript/typescript.svg' },
-  { name: 'JavaScript', logo: '/node_modules/programming-languages-logos/src/javascript/javascript.svg' },
-  { name: 'Python', logo: '/node_modules/programming-languages-logos/src/python/python.svg' },
-  { name: 'Java', logo: '/node_modules/programming-languages-logos/src/java/java.svg' },
-  { name: 'C++', logo: '/node_modules/programming-languages-logos/src/cpp/cpp.svg' },
-  { name: 'C#', logo: '/node_modules/programming-languages-logos/src/csharp/csharp.svg' },
-  { name: 'HTML', logo: '/node_modules/programming-languages-logos/src/html/html.svg' },
-  { name: 'CSS', logo: '/node_modules/programming-languages-logos/src/css/css.svg' },
-  { name: 'Lua', logo: '/node_modules/programming-languages-logos/src/lua/lua.svg' },
-  { name: 'TypeScript', logo: '/node_modules/programming-languages-logos/src/typescript/typescript.svg' },
-  { name: 'JavaScript', logo: '/node_modules/programming-languages-logos/src/javascript/javascript.svg' },
-  { name: 'Python', logo: '/node_modules/programming-languages-logos/src/python/python.svg' },
-  { name: 'Java', logo: '/node_modules/programming-languages-logos/src/java/java.svg' },
-  { name: 'C++', logo: '/node_modules/programming-languages-logos/src/cpp/cpp.svg' },
-  { name: 'C#', logo: '/node_modules/programming-languages-logos/src/csharp/csharp.svg' },
-  { name: 'HTML', logo: '/node_modules/programming-languages-logos/src/html/html.svg' },
-  { name: 'CSS', logo: '/node_modules/programming-languages-logos/src/css/css.svg' },
-  { name: 'Lua', logo: '/node_modules/programming-languages-logos/src/lua/lua.svg' }
+  { name: 'TypeScript', logo: '/images/languages/typescript.svg' },
+  { name: 'JavaScript', logo: '/images/languages/javascript.svg' },
+  { name: 'Python', logo: '/images/languages/python.svg' },
+  { name: 'Java', logo: '/images/languages/java.svg' },
+  { name: 'C++', logo: '/images/languages/cpp.svg' },
+  { name: 'C#', logo: '/images/languages/csharp.svg' },
+  { name: 'HTML', logo: '/images/languages/html.svg' },
+  { name: 'CSS', logo: '/images/languages/css.svg' },
+  { name: 'Lua', logo: '/images/languages/lua.svg' },
+  { name: 'TypeScript', logo: '/images/languages/typescript.svg' },
+  { name: 'JavaScript', logo: '/images/languages/javascript.svg' },
+  { name: 'Python', logo: '/images/languages/python.svg' },
+  { name: 'Java', logo: '/images/languages/java.svg' },
+  { name: 'C++', logo: '/images/languages/cpp.svg' },
+  { name: 'C#', logo: '/images/languages/csharp.svg' },
+  { name: 'HTML', logo: '/images/languages/html.svg' },
+  { name: 'CSS', logo: '/images/languages/css.svg' },
+  { name: 'Lua', logo: '/images/languages/lua.svg' },
+  { name: 'TypeScript', logo: '/images/languages/typescript.svg' },
+  { name: 'JavaScript', logo: '/images/languages/javascript.svg' },
+  { name: 'Python', logo: '/images/languages/python.svg' },
+  { name: 'Java', logo: '/images/languages/java.svg' },
+  { name: 'C++', logo: '/images/languages/cpp.svg' },
+  { name: 'C#', logo: '/images/languages/csharp.svg' },
+  { name: 'HTML', logo: '/images/languages/html.svg' },
+  { name: 'CSS', logo: '/images/languages/css.svg' },
+  { name: 'Lua', logo: '/images/languages/lua.svg' }
 ];
 
 const LanguagesMarquee: React.FC = () => {
