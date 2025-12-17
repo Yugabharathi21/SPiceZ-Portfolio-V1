@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, GitBranch, Star, GitFork, Calendar, ExternalLink, Code } from 'lucide-react';
 
@@ -22,45 +22,86 @@ interface Repository {
 }
 
 const GitHubContributions: React.FC = () => {
-  const [stats, setStats] = useState<GitHubStats | null>(null);
-  const [repos, setRepos] = useState<Repository[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Mock data for GitHub stats
+  const stats: GitHubStats = {
+    public_repos: 24,
+    followers: 156,
+    following: 32,
+    total_contributions: 1845
+  };
+
+  const repos: Repository[] = [
+    {
+      id: 1,
+      name: "portfolio-v2",
+      description: "A modern, cyberpunk-themed portfolio website built with React and Tailwind CSS.",
+      html_url: "#",
+      language: "TypeScript",
+      stargazers_count: 45,
+      forks_count: 12,
+      updated_at: "2024-03-15T10:00:00Z",
+      topics: ["react", "tailwindcss", "framer-motion"]
+    },
+    {
+      id: 2,
+      name: "ai-code-assistant",
+      description: "VS Code extension that uses AI to suggest code improvements and refactoring.",
+      html_url: "#",
+      language: "TypeScript",
+      stargazers_count: 128,
+      forks_count: 34,
+      updated_at: "2024-03-10T14:30:00Z",
+      topics: ["vscode-extension", "ai", "openai"]
+    },
+    {
+      id: 3,
+      name: "ecommerce-api",
+      description: "Scalable REST API for e-commerce platforms using Node.js and PostgreSQL.",
+      html_url: "#",
+      language: "JavaScript",
+      stargazers_count: 89,
+      forks_count: 23,
+      updated_at: "2024-03-05T09:15:00Z",
+      topics: ["nodejs", "express", "postgresql"]
+    },
+    {
+      id: 4,
+      name: "algo-visualizer",
+      description: "Interactive visualization of common sorting and graph algorithms.",
+      html_url: "#",
+      language: "React",
+      stargazers_count: 210,
+      forks_count: 56,
+      updated_at: "2024-02-28T16:45:00Z",
+      topics: ["algorithms", "visualization", "education"]
+    },
+    {
+      id: 5,
+      name: "weather-cli",
+      description: "Command-line tool to fetch weather forecasts for any location.",
+      html_url: "#",
+      language: "Go",
+      stargazers_count: 67,
+      forks_count: 8,
+      updated_at: "2024-02-20T11:20:00Z",
+      topics: ["cli", "golang", "weather"]
+    },
+    {
+      id: 6,
+      name: "chat-app-realtime",
+      description: "Real-time chat application using WebSocket and Redis.",
+      html_url: "#",
+      language: "Python",
+      stargazers_count: 95,
+      forks_count: 18,
+      updated_at: "2024-02-15T13:10:00Z",
+      topics: ["websocket", "redis", "django"]
+    }
+  ];
 
   const username = 'octocat';
-
-  useEffect(() => {
-    const fetchGitHubData = async () => {
-      try {
-        setLoading(true);
-
-        // Fetch user stats
-        const userResponse = await fetch(`https://api.github.com/users/${username}`);
-        if (!userResponse.ok) throw new Error('Failed to fetch user data');
-        const userData = await userResponse.json();
-
-        // Fetch repositories
-        const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
-        if (!reposResponse.ok) throw new Error('Failed to fetch repositories');
-        const reposData = await reposResponse.json();
-
-        setStats({
-          public_repos: userData.public_repos,
-          followers: userData.followers,
-          following: userData.following,
-        });
-
-        setRepos(reposData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        console.error('GitHub API Error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGitHubData();
-  }, []);
+  const loading = false;
+  const error = null;
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -140,8 +181,8 @@ const GitHubContributions: React.FC = () => {
   }
 
   return (
-    <section id="github" className="py-16 relative">
-      <div className="container mx-auto px-4">
+    <div className="relative">
+      <div className="">
         {/* Compact Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -269,7 +310,7 @@ const GitHubContributions: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {repos.slice(0, 6).map((repo, index) => (
+            {repos.slice(0, 3).map((repo, index) => (
               <motion.div
                 key={repo.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -340,7 +381,7 @@ const GitHubContributions: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

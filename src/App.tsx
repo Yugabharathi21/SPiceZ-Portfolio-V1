@@ -1,41 +1,75 @@
-import { useState, useCallback, memo, lazy, Suspense } from 'react';
+import { useState, useEffect, useCallback, memo, lazy, Suspense } from 'react';
 import { Terminal, Gamepad2, Image, Youtube, Mail, Github, Car, Palette, Menu, X, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from './styles/animations';
 import LoadingFallback from './components/LoadingFallback';
-import ImagePreviewModal from './components/ImagePreviewModal';
 import ResumePreviewModal from './components/ResumePreviewModal';
 import SkillCard from './components/SkillCard';
 import UnderConstruction from './components/UnderConstruction';
 import { usePortfolioData } from './hooks/usePortfolioData';
 import ProjectCard from './components/ProjectCard';
-import MultimediaCard from './components/MultimediaCard';
 import { WIPGrid } from './components/WIPGrid';
 import LanguagesMarquee from './components/LanguagesMarquee';
 import GitHubContributions from './components/GitHubContributions';
 
 // Lazy load components
 const BackgroundEffects = lazy(() => import('./components/BackgroundEffects'));
+import LeetCodeStats from './components/LeetCodeStats';
 
 // Check if site is under construction from environment variable
 const isUnderConstruction = import.meta.env.VITE_UNDER_CONSTRUCTION === 'true';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   // Fetch portfolio data from GitHub
   const { data: portfolioData, loading, error } = usePortfolioData();
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      // Basic images
+      const imageUrls = [
+        "https://placehold.co/800x800?text=Profile+Image",
+        "/images/profile-bw.png"
+      ];
+
+      // Project images if available
+      if (portfolioData?.projects) {
+        portfolioData.projects.forEach(p => {
+          if (p.image) imageUrls.push(p.image);
+        });
+      }
+
+      // Preload all
+      try {
+        const promises = imageUrls.map(src => {
+          return new Promise((resolve) => {
+            const img = new window.Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = resolve; // Continue even if error
+          });
+        });
+
+        await Promise.all(promises);
+      } catch (err) {
+        console.error("Error preloading images:", err);
+      } finally {
+        setImagesLoaded(true);
+      }
+    };
+
+    // If data is ready (or error), start preloading. 
+    // If loading is still true, we wait.
+    if (!loading) {
+      preloadImages();
+    }
+  }, [portfolioData, loading]);
 
   const handleMenuToggle = useCallback(() => {
     setIsMenuOpen(prev => !prev);
-  }, []);
-
-  const handleImagePreview = useCallback((image: string) => {
-    setSelectedImage(image);
-    setIsModalOpen(true);
   }, []);
 
   if (isUnderConstruction) {
@@ -49,7 +83,7 @@ function App() {
     );
   }
 
-  if (loading) {
+  if (loading || !imagesLoaded) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <Suspense fallback={<LoadingFallback />}>
@@ -230,6 +264,10 @@ function App() {
                       src="https://placehold.co/800x800?text=Profile+Image"
                       alt="Profile"
                       className="w-[800px] md:w-[600px] lg:w-[800px] h-full object-cover object-[80%_top] scale-125 md:scale-110 lg:scale-135"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      fetchPriority="high"
                     />
                   </motion.div>
                 </div>
@@ -248,6 +286,7 @@ function App() {
                   src="/images/profile-bw.png"
                   alt="Profile"
                   className="w-full h-full object-cover object-top scale-155"
+                  fetchPriority="high"
                 />
               </div>
             </motion.div>
@@ -328,41 +367,14 @@ function App() {
             </div>
           </motion.section>
 
-          {/* GitHub Contributions */}
-          <GitHubContributions />
-
-          {/* Multimedia Section */}
-          <section id="multimedia" className="py-32 bg-black/30">
-            <div className="container mx-auto px-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mb-12"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-emerald-400">$</span>
-                  <h2 className="text-3xl text-white">Multimedia</h2>
-                  <span className="animate-pulse text-emerald-400/50">▊</span>
-                </div>
-                <p className="text-white/70 terminal-text">A showcase of my design work and multimedia projects</p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? (
-                  portfolioData.multimedia.map((item, index) => (
-                    <MultimediaCard
-                      key={index}
-                      {...item}
-                      onClick={() => handleImagePreview(item.image)}
-                    />
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-white/60 terminal-text">No multimedia content available at the moment.</p>
-                    <p className="text-white/40 text-sm mt-2 terminal-text">Check back soon for design showcases!</p>
-                  </div>
-                )}
+          {/* Coding Activity Section */}
+          <section id="github" className="container mx-auto px-4 py-32">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <GitHubContributions />
+              </div>
+              <div className="lg:col-span-1">
+                <LeetCodeStats />
               </div>
             </div>
           </section>
@@ -571,13 +583,6 @@ function App() {
         </div>
 
         {/* Image Preview Modal */}
-        <ImagePreviewModal
-          image={selectedImage}
-          title={portfolioData?.multimedia && portfolioData.multimedia.length > 0 ? portfolioData.multimedia[0].title : "Preview"}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-
         <ResumePreviewModal
           isOpen={isResumeModalOpen}
           onClose={() => setIsResumeModalOpen(false)}
