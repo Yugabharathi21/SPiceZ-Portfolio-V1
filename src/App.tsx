@@ -25,7 +25,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-  
+
   // Fetch portfolio data from GitHub
   const { data: portfolioData, loading, error } = usePortfolioData();
 
@@ -69,7 +69,7 @@ function App() {
         <div className="text-center terminal-window p-8 max-w-md">
           <h2 className="text-white text-xl mb-4">Connection Error</h2>
           <p className="text-white/70 terminal-text mb-4">Unable to load portfolio data. Please try again later.</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 hover:bg-emerald-500/30 transition-all"
           >
@@ -85,7 +85,7 @@ function App() {
       <BackgroundEffects />
       <Suspense fallback={<LoadingFallback />}>
         {/* Navigation */}
-        <motion.nav 
+        <motion.nav
           initial={{ y: -100 }}
           animate={{ y: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
@@ -93,8 +93,8 @@ function App() {
         >
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center h-16">
-              <span className="text-white/90 text-xl font-['Share_Tech_Mono'] tracking-wider">[YBJ]</span>
-              
+              <span className="text-white/90 text-xl font-['Share_Tech_Mono'] tracking-wider">[JD]</span>
+
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-8">
                 <a href="#home" className="nav-link">HOME</a>
@@ -102,10 +102,10 @@ function App() {
                 <a href="#github" className="nav-link">GITHUB</a>
                 <a href="#projects" className="nav-link">PROJECTS</a>
                 <a href="#contact" className="nav-link">CONTACT</a>
-                
+
                 {/* Resume Button */}
                 <div className="flex items-center ml-4 terminal-text">
-                  <button 
+                  <button
                     onClick={() => setIsResumeModalOpen(true)}
                     className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-all glass-card border border-emerald-400/20 hover:border-emerald-400/40"
                   >
@@ -117,7 +117,7 @@ function App() {
 
               {/* Mobile menu button */}
               <div className="md:hidden flex items-center gap-3">
-                <button 
+                <button
                   className="text-white/90 hover:text-white transition-colors"
                   onClick={handleMenuToggle}
                 >
@@ -134,7 +134,7 @@ function App() {
                 <a href="#github" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">GITHUB</a>
                 <a href="#projects" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">PROJECTS</a>
                 <a href="#contact" className="block py-3 px-4 text-white/80 hover:text-white hover:bg-white/5 transition-all">CONTACT</a>
-                <button 
+                <button
                   onClick={() => setIsResumeModalOpen(true)}
                   className="flex items-center gap-2 py-3 px-4 text-emerald-400/80 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all w-full text-left"
                 >
@@ -151,7 +151,7 @@ function App() {
           {/* Hero Section */}
           <section id="home" className="container mx-auto px-4 pt-20 pb-32">
             {/* Main Hero Content */}
-            <motion.div 
+            <motion.div
               className="terminal-window pl-8 relative overflow-hidden"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -162,13 +162,13 @@ function App() {
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                <span className="text-white/50 text-xs ml-4 terminal-text">terminal@ybj:~</span>
+                <span className="text-white/50 text-xs ml-4 terminal-text">terminal@user:~</span>
               </div>
               <div className="pt-8">
                 <div className="flex flex-col md:flex-row md:items-center gap-8 relative">
                   {/* Terminal content on the left */}
                   <div className="flex-1 z-10 py-8">
-                    <motion.div 
+                    <motion.div
                       className="flex items-center gap-3 mb-6"
                       {...fadeInUp}
                     >
@@ -176,49 +176,49 @@ function App() {
                       <span className="text-white/80 text-sm tracking-wider terminal-text">[system@terminal] ~ $ whoami</span>
                       <span className="animate-pulse">▊</span>
                     </motion.div>
-                    <motion.h1 
+                    <motion.h1
                       className="text-4xl font-bold mb-6 text-white tracking-tight"
                       {...fadeInUp}
                     >
-                      YUGA BHARATHI JAISANKAR
+                      JOHN DOE
                     </motion.h1>
-                    <motion.p 
+                    <motion.p
                       className="text-lg text-white/80 mb-6 font-light"
                       {...fadeInUp}
                     >
-                      III Year Computer Science Engineering @ Kongu Engineering College, Erode
+                      Full Stack Developer | UI/UX Enthusiast
                     </motion.p>
-                    <motion.div 
+                    <motion.div
                       className="flex gap-6 mb-6"
                       variants={staggerContainer}
                       initial="initial"
                       animate="animate"
                     >
-                      <a 
-                        href="https://github.com/Yugabharathi21" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href="#"
+                        target="_self"
+                        rel="noreferrer"
                         className="text-white/80 hover:text-white transition-all"
                       >
                         <Github className="w-5 h-5" />
                       </a>
-                      <a 
-                        href="https://www.youtube.com/@SPz-G21" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href="#"
+                        target="_self"
+                        rel="noreferrer"
                         className="text-white/80 hover:text-white transition-all"
                       >
                         <Youtube className="w-5 h-5" />
                       </a>
-                      <a 
-                        href="mailto:yuga.bharathijai2106@gmail.com" 
+                      <a
+                        href="mailto:email@example.com"
                         className="text-white/80 hover:text-white transition-all"
                       >
                         <Mail className="w-5 h-5" />
                       </a>
                     </motion.div>
                   </div>
-                  
+
                   {/* Desktop Profile Image */}
                   <motion.div
                     className="md:relative md:w-[280px] lg:w-[350px] absolute right-0 md:right-0 top-0 bottom-0 overflow-hidden hidden md:block"
@@ -227,7 +227,7 @@ function App() {
                     transition={{ duration: 1 }}
                   >
                     <motion.img
-                      src="https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835772/profile-bw_knwbir.png"
+                      src="https://placehold.co/800x800?text=Profile+Image"
                       alt="Profile"
                       className="w-[800px] md:w-[600px] lg:w-[800px] h-full object-cover object-[80%_top] scale-125 md:scale-110 lg:scale-135"
                     />
@@ -237,7 +237,7 @@ function App() {
             </motion.div>
 
             {/* Mobile Profile Image Box */}
-            <motion.div 
+            <motion.div
               className="md:hidden mt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -294,8 +294,8 @@ function App() {
           </section>
 
           {/* Skills Grid */}
-          <motion.section 
-            id="skills" 
+          <motion.section
+            id="skills"
             className="container mx-auto px-4 py-32"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -412,7 +412,7 @@ function App() {
                 {/* Email */}
                 <motion.a
                   variants={fadeInUp}
-                  href="mailto:yuga.bharathijai2106@gmail.com"
+                  href="mailto:email@example.com"
                   className="terminal-window p-6 hover:bg-white/5 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-4">
@@ -422,7 +422,7 @@ function App() {
                     <div className="flex-1">
                       <p className="text-white/60 text-sm terminal-text mb-1">Email</p>
                       <p className="text-white group-hover:text-emerald-400 transition-colors terminal-text text-sm">
-                        yuga.bharathijai2106@gmail.com
+                        email@example.com
                       </p>
                     </div>
                   </div>
@@ -431,9 +431,9 @@ function App() {
                 {/* GitHub */}
                 <motion.a
                   variants={fadeInUp}
-                  href="https://github.com/Yugabharathi21"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
+                  target="_self"
+                  rel="noreferrer"
                   className="terminal-window p-6 hover:bg-white/5 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-4">
@@ -443,7 +443,7 @@ function App() {
                     <div className="flex-1">
                       <p className="text-white/60 text-sm terminal-text mb-1">GitHub</p>
                       <p className="text-white group-hover:text-emerald-400 transition-colors terminal-text text-sm">
-                        github.com/Yugabharathi21
+                        github.com/username
                       </p>
                     </div>
                   </div>
@@ -510,13 +510,13 @@ function App() {
                   <p className="text-white/60">
                     <span className="text-emerald-400">$</span> whoami
                   </p>
-                  <p className="text-white/80 ml-4">Yuga Bharathi Jaisankar</p>
-                  
+                  <p className="text-white/80 ml-4">John Doe</p>
+
                   <p className="text-white/60">
                     <span className="text-emerald-400">$</span> uptime
                   </p>
                   <p className="text-white/80 ml-4">20 years of runtime, no crashes yet</p>
-                  
+
                   <p className="text-white/60">
                     <span className="text-emerald-400">$</span> skills --list | grep "passion"
                   </p>
@@ -531,7 +531,7 @@ function App() {
                   transition={{ delay: 0.6 }}
                   className="terminal-text"
                 >
-                  © 2024 YBJ
+                  © 2024 John Doe
                 </motion.p>
                 <span className="hidden sm:block">•</span>
                 <motion.p

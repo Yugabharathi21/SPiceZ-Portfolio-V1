@@ -2,219 +2,72 @@
   "projects": [
     {
       "id": 1,
-      "title": "Portfolio Website",
-      "description": "A sleek and responsive portfolio website built with React, Tailwind CSS, and Framer Motion to showcase my work and skills.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835666/1_mawfcp.png",
-      "githubUrl": "https://github.com/Yugabharathi21/Portfolio-Webpage",
-      "liveUrl": "https://yugabharathi21.netlify.app",
-      "technologies": ["React", "Tailwind CSS", "TypeScript", "Framer Motion"]
+      "title": "Project Alpha",
+      "description": "A high-performance web application built with modern technologies.",
+      "image": "https://placehold.co/600x400?text=Project+Alpha",
+      "githubUrl": "#",
+      "liveUrl": "#",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Tailwind"
+      ]
     },
     {
       "id": 2,
-      "title": "Event Promotion Website",
-      "description": "A futuristic Fallout 3 terminal-style event website designed for Crescita 2k25, featuring a retro UI and immersive experience.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835666/3_sf2erz.jpg",
-      "githubUrl": "https://github.com/Yugabharathi21/final-crescita/tree/main",
-      "liveUrl": "https://cse-crescita-25.netlify.app/",
-      "technologies": ["React", "Tailwind CSS", "TypeScript"]
+      "title": "Project Beta",
+      "description": "An innovative solution for complex data visualization.",
+      "image": "https://placehold.co/600x400?text=Project+Beta",
+      "githubUrl": "#",
+      "liveUrl": "#",
+      "technologies": [
+        "Vue",
+        "D3.js",
+        "Node.js"
+      ]
     },
     {
       "id": 3,
-      "title": "FiveM HUD for Qbox",
-      "description": "A custom HUD interface for FiveM, revamped from qbx-hud to improve user experience and visuals for roleplay servers.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835672/2_py6l75.png",
-      "githubUrl": "https://github.com/Yugabharathi21/spz-hud-fivem",
+      "title": "Project Gamma",
+      "description": "Mobile-first approach to e-commerce experiences.",
+      "image": "https://placehold.co/600x400?text=Project+Gamma",
+      "githubUrl": "#",
       "liveUrl": "#",
-      "technologies": ["Lua", "JavaScript", "FiveM API", "HTML", "CSS"]
-    },
-    {
-      "id": 4,
-      "title": "ThinkForge – Study Planner Chatbot",
-      "description": "An AI-powered chatbot that helps students plan their study schedules effectively. Built for KEC Hackathon 2k25, and winner of Hackbuzz.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835666/5_qqxw4g.png",
-      "githubUrl": "https://github.com/Yugabharathi21/Think-Forge",
-      "liveUrl": "#",
-      "technologies": ["React", "Node.js", "Express", "MongoDB", "FAST API"]
+      "technologies": [
+        "React Native",
+        "Firebase"
+      ]
     }
   ],
   "multimedia": [
     {
-      "title": "Poster Design",
-      "description": "Promotional poster created for a college club event.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835756/4_vacf5j.png"
+      "title": "Design Concept 1",
+      "description": " minimalist brand identity design.",
+      "image": "https://placehold.co/600x600?text=Design+1"
     },
     {
-      "title": "Poster Design",
-      "description": "Event-themed poster crafted for my college club.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835755/3_jywst7.png"
+      "title": "Design Concept 2",
+      "description": "Modern UI interface mockup.",
+      "image": "https://placehold.co/600x600?text=Design+2"
     },
     {
-      "title": "Poster Design",
-      "description": "Creative poster made for a university-level event promotion.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835754/2_awy3e9.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Freelance portfolio thumbnail designed to reflect a bold and minimal aesthetic.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835756/4_zl0mjs.jpg"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "A YouTube thumbnail created for a freelance client.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835757/5_tfngxd.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "A personal branding thumbnail design showcasing my editing style.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835759/6_ritdqq.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Freelance thumbnail crafted for high visibility and engagement.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835754/2_ph5d8z.jpg"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Client project thumbnail designed to maximize click-through rate.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835754/3_kcog3o.jpg"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Freelance thumbnail demonstrating color and composition skills.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835699/24_rci3au.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Custom thumbnail developed for my portfolio display.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835694/19_nqoabr.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Thumbnail created for a content-focused freelance project.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835881/Firefly_20250620192002_l5kwy4.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835871/fr2_iubogv.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835826/8f8811fa-3791-440c-89a3-c72369768c1b_n5t9km.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835823/FCGR6_amepb2.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835822/wegr6_wrevcy.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835767/12_poolwl.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835767/13_eqbaml.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Designed for a freelance gig, focusing on bold typography.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835764/10_v9gbur.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Thumbnail showcasing creative freelance visual design work.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835764/8_y3xj1x.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Personal use thumbnail to demonstrate visual composition.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835764/9_wxg4k5.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Thumbnail showcasing creative freelance visual design work.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835761/7_qckzvw.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Personal use thumbnail to demonstrate visual composition.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835759/6_ritdqq.png"
-    },
-    {
-      "title": "Thumbnail Design",
-      "description": "Personal use thumbnail to demonstrate visual composition.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835757/5_tfngxd.png"
-    },
-    {
-      "title": "Logo Design",
-      "description": "A modern logo created for a freelance client's brand identity.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835680/18_zhr8uz.png"
-    },
-    {
-      "title": "Logo Design",
-      "description": "A logo-poster hybrid design made for a college event campaign.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835679/17_b7vrrr.png"
-    },
-    {
-      "title": "Logo Design",
-      "description": "Freelance logo design focusing on minimalist visual impact.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835679/16_gahv80.png"
-    },
-    {
-      "title": "Logo Design",
-      "description": "Brand logo concept crafted for a client's startup project.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835766/15_nzzogp.png"
-    },
-    {
-      "title": "Logo Design",
-      "description": "Bold and clean logo created for a client in freelance design.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835765/14_orq8me.png"
-    },
-    {
-      "title": "Banner Design",
-      "description": "Freelance banner designed for online ad campaign.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835698/21_uosy5m.png"
-    },
-    {
-      "title": "Banner Design",
-      "description": "Client-focused banner for a college-level event showcase.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835698/23_p2y85k.png"
-    },
-    {
-      "title": "Banner Design",
-      "description": "Custom banner created for a freelance client campaign.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835699/22_enzwzv.png"
-    },
-    {
-      "title": "Banner Design",
-      "description": "A clean and impactful banner designed for personal branding.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835694/20_j4swsq.png"
+      "title": "Design Concept 3",
+      "description": "Creative poster art.",
+      "image": "https://placehold.co/600x600?text=Design+3"
     }
   ],
   "wip": [
     {
-      "id": 2,
-      "title": "Ox-Inventory Revamp by SPZYT",
-      "description": "A complete visual and functional revamp of the popular ox-inventory system, customized for enhanced UX and FiveM gameplay integration.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835670/7_heu8wr.png",
-      "githubUrl": "https://github.com/Yugabharathi21/Think-Forge",
-      "technologies": ["React", "Node.js", "Express", "MongoDB", "FAST API"]
-    },
-    {
-      "id": 3,
-      "title": "Craftify – E-commerce Platform",
-      "description": "An online e-commerce platform developed as part of my college mini project, focused on craft item management and seamless checkout.",
-      "image": "https://res.cloudinary.com/dedmtl2ze/image/upload/v1755835667/4_jilxlq.jpg",
-      "githubUrl": "https://github.com/Yugabharathi21/Think-Forge",
-      "technologies": ["React", "Node.js", "Express", "MongoDB"]
+      "id": 1,
+      "title": "Secret Project X",
+      "description": "Next generation AI-powered tool.",
+      "image": "https://placehold.co/600x400?text=WIP+Project",
+      "githubUrl": "#",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "React"
+      ]
     }
   ]
 }

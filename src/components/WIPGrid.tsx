@@ -32,7 +32,7 @@ const WIPCard: React.FC<WIPCardProps> = ({ project, index }) => {
           <div className="w-2 h-2 rounded-full bg-green-500/80"></div>
         </div>
         <span className="text-white/50 text-xs ml-3 terminal-text">
-          wip@ybj:~$ progress {project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}
+          wip@user:~$ progress {project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}
         </span>
       </div>
 
@@ -54,7 +54,7 @@ const WIPCard: React.FC<WIPCardProps> = ({ project, index }) => {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        
+
         {/* Progress overlay */}
         <div className="absolute inset-0 bg-black/10"></div>
       </div>
@@ -64,7 +64,7 @@ const WIPCard: React.FC<WIPCardProps> = ({ project, index }) => {
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-white text-xl font-medium line-clamp-1 flex-1">{project.title}</h3>
         </div>
-        
+
         <p className="text-white/70 text-sm mb-4 line-clamp-3 leading-relaxed">{project.description}</p>
 
         {/* Technologies */}
@@ -120,7 +120,7 @@ interface WIPGridProps {
 export const WIPGrid: React.FC<WIPGridProps> = ({ wipProjects }) => {
   // Safety check to ensure wipProjects is always an array
   const safeWipProjects = Array.isArray(wipProjects) ? wipProjects : [];
-  
+
   if (safeWipProjects.length === 0) {
     return (
       <div className="text-center py-12">

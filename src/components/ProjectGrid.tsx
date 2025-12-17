@@ -25,7 +25,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           <div className="w-2 h-2 rounded-full bg-green-500/80"></div>
         </div>
         <span className="text-white/50 text-xs ml-3 terminal-text">
-          project@ybj:~$ view {project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}
+          project@user:~$ view {project.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}
         </span>
       </div>
 

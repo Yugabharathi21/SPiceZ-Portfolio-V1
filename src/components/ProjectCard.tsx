@@ -24,7 +24,7 @@ const ProjectCard = ({ title, description, image, githubUrl, liveUrl, technologi
           <div className="w-2 h-2 rounded-full bg-yellow-500/80"></div>
           <div className="w-2 h-2 rounded-full bg-green-500/80"></div>
         </div>
-        <span className="text-white/50 text-xs ml-3 terminal-text">project@ybj:~$ view {title.toLowerCase().replace(/\s+/g, '-')}</span>
+        <span className="text-white/50 text-xs ml-3 terminal-text">project@user:~$ view {title.toLowerCase().replace(/\s+/g, '-')}</span>
       </div>
 
       {/* Project Image */}

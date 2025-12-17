@@ -1,4 +1,4 @@
-# Modern Portfolio Website - YBJ
+# Modern Portfolio Website
 
 A sleek, cyberpunk-inspired portfolio website built with React, Tailwind CSS, and Framer Motion. Features a terminal-like interface with smooth animations and a responsive design.
 
@@ -35,7 +35,7 @@ A sleek, cyberpunk-inspired portfolio website built with React, Tailwind CSS, an
 
 1. Clone the repository
 ```bash
-git clone https://github.com/Yugabharathi21/Portfolio-Webpage.git
+git clone https://github.com/username/repo-name.git
 ```
 
 2. Install dependencies
@@ -79,10 +79,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Yuga Bharathi Jaisankar
-- GitHub: [@Yugabharathi21](https://github.com/Yugabharathi21)
-- YouTube: [@SPz-G21](https://www.youtube.com/@SPz-G21)
-- LinkedIn: [Yuga Bharathi Jaisankar](https://www.linkedin.com/in/yuga-bharathi-jaisankar-2a426a291/)
+John Doe
+- GitHub: [@username](https://github.com/username)
+- YouTube: [@username](https://youtube.com)
+- LinkedIn: [John Doe](https://linkedin.com)
 
 ## 🙏 Acknowledgments
 

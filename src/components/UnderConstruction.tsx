@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const UnderConstruction = () => {
   const [text, setText] = useState('');
-  const fullText = '[system@ybj] Initializing portfolio system...';
+  const fullText = '[system@local] Initializing portfolio system...';
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const UnderConstruction = () => {
 
   return (
     <div className="min-h-screen bg-black pixel-bg flex items-center justify-center p-4">
-      <motion.div 
+      <motion.div
         className="terminal-window w-full max-w-2xl"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -38,7 +38,7 @@ const UnderConstruction = () => {
           <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
           <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-          <span className="text-white/50 text-xs ml-4 terminal-text">maintenance@ybj:~</span>
+          <span className="text-white/50 text-xs ml-4 terminal-text">maintenance@user:~</span>
         </div>
 
         <div className="p-6 space-y-4">
@@ -59,7 +59,7 @@ const UnderConstruction = () => {
             >
               {/* ASCII Art */}
               <pre className="text-emerald-400/80 text-xs sm:text-sm font-mono leading-tight">
-{`
+                {`
 _______     _______     ____     _______     _______     _______
 7     7     7     7     7  7     7     7     7     7     7     7
 |  ___!     |  -  |     |  |     |  ___!     |  ___!     !___  |
@@ -102,15 +102,15 @@ _______     _______     ____     _______     _______     _______
                 <p className="text-white/60 terminal-text">Meanwhile, you can reach me at:</p>
                 <div className="flex gap-4">
                   <a
-                    href="https://github.com/Yugabharathi21"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    target="_self"
+                    rel="noreferrer"
                     className="text-white/60 hover:text-white transition-colors"
                   >
                     <Github className="w-5 h-5" />
                   </a>
                   <a
-                    href="mailto:your.email@example.com"
+                    href="mailto:email@example.com"
                     className="text-white/60 hover:text-white transition-colors"
                   >
                     <Mail className="w-5 h-5" />

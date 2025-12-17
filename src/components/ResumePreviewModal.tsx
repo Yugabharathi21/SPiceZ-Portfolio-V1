@@ -16,7 +16,7 @@ const ResumePreviewModal = ({ isOpen, onClose }: ResumePreviewModalProps) => {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = resumePdfPath;
-    link.download = 'YugaBharathi_Resume.pdf';
+    link.download = 'Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -41,11 +41,10 @@ const ResumePreviewModal = ({ isOpen, onClose }: ResumePreviewModalProps) => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className={`relative bg-black/50 rounded-lg overflow-hidden terminal-window flex flex-col ${
-              isFullscreen 
-                ? 'fixed inset-0 m-0' 
+            className={`relative bg-black/50 rounded-lg overflow-hidden terminal-window flex flex-col ${isFullscreen
+                ? 'fixed inset-0 m-0'
                 : 'w-full h-full md:h-[90vh] md:w-[90vw] max-w-7xl m-0 md:m-4'
-            }`}
+              }`}
           >
             {/* Terminal Header */}
             <div className="absolute top-0 left-0 w-full h-8 bg-black/50 border-b border-white/10 flex items-center justify-between px-4 z-10">
@@ -53,7 +52,7 @@ const ResumePreviewModal = ({ isOpen, onClose }: ResumePreviewModalProps) => {
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                <span className="text-white/50 text-xs ml-4 terminal-text">resume@ybj:~$ display resume.jpeg</span>
+                <span className="text-white/50 text-xs ml-4 terminal-text">resume@user:~$ display resume.jpeg</span>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -79,14 +78,13 @@ const ResumePreviewModal = ({ isOpen, onClose }: ResumePreviewModalProps) => {
                     <div className="animate-pulse text-emerald-400">Loading preview...</div>
                   </div>
                 )}
-                
+
                 <img
                   src={resumeImagePath}
                   alt="Resume Preview"
                   onLoad={() => setImageLoaded(true)}
-                  className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
-                    imageLoaded ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
                 />
               </div>
             </div>

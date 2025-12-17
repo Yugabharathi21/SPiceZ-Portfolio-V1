@@ -27,29 +27,29 @@ const GitHubContributions: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const username = 'Yugabharathi21';
+  const username = 'octocat';
 
   useEffect(() => {
     const fetchGitHubData = async () => {
       try {
         setLoading(true);
-        
+
         // Fetch user stats
         const userResponse = await fetch(`https://api.github.com/users/${username}`);
         if (!userResponse.ok) throw new Error('Failed to fetch user data');
         const userData = await userResponse.json();
-        
+
         // Fetch repositories
         const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
         if (!reposResponse.ok) throw new Error('Failed to fetch repositories');
         const reposData = await reposResponse.json();
-        
+
         setStats({
           public_repos: userData.public_repos,
           followers: userData.followers,
           following: userData.following,
         });
-        
+
         setRepos(reposData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
@@ -123,7 +123,7 @@ const GitHubContributions: React.FC = () => {
     return (
       <section id="github" className="py-32">
         <div className="container mx-auto px-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="glass-card p-8 bg-gradient-to-br from-red-900/20 to-red-800/10 border border-red-400/30 backdrop-blur-xl"
@@ -179,7 +179,7 @@ const GitHubContributions: React.FC = () => {
               </div>
             </div>
           </motion.div>
-          
+
           <motion.div variants={itemVariants} className="group">
             <div className="p-4 bg-black/60 backdrop-blur-sm border border-neutral-800 rounded-xl hover:border-blue-400/40 transition-all duration-300 hover:bg-black/80">
               <div className="flex items-center gap-3">
@@ -193,7 +193,7 @@ const GitHubContributions: React.FC = () => {
               </div>
             </div>
           </motion.div>
-          
+
           <motion.div variants={itemVariants} className="group">
             <div className="p-4 bg-black/60 backdrop-blur-sm border border-neutral-800 rounded-xl hover:border-purple-400/40 transition-all duration-300 hover:bg-black/80">
               <div className="flex items-center gap-3">
@@ -267,7 +267,7 @@ const GitHubContributions: React.FC = () => {
               <p className="text-white/50 terminal-text text-sm">Latest projects and contributions</p>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {repos.slice(0, 6).map((repo, index) => (
               <motion.div
@@ -300,11 +300,11 @@ const GitHubContributions: React.FC = () => {
                       <ExternalLink className="w-3 h-3" />
                     </motion.a>
                   </div>
-                  
+
                   <p className="text-white/60 text-xs terminal-text mb-4 line-clamp-2 leading-relaxed">
                     {repo.description || 'No description available'}
                   </p>
-                  
+
                   {/* Compact Stats */}
                   <div className="flex items-center justify-between text-xs">
                     <div className="flex items-center gap-3">
@@ -317,18 +317,18 @@ const GitHubContributions: React.FC = () => {
                           <span className="text-white/50 terminal-text text-xs">{repo.language}</span>
                         </div>
                       )}
-                      
+
                       <div className="flex items-center gap-1 text-yellow-400/70">
                         <Star className="w-2.5 h-2.5" />
                         <span className="terminal-text">{repo.stargazers_count}</span>
                       </div>
-                      
+
                       <div className="flex items-center gap-1 text-blue-400/70">
                         <GitFork className="w-2.5 h-2.5" />
                         <span className="terminal-text">{repo.forks_count}</span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-1 text-white/30">
                       <Calendar className="w-2.5 h-2.5" />
                       <span className="terminal-text text-xs">{formatDate(repo.updated_at)}</span>
